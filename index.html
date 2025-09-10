@@ -11,12 +11,12 @@
         .futuristic-bg {
             background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #2d1b69 50%, #1a1a3e 75%, #0f0f23 100%);
             position: relative;
-            overflow: hidden;
+            min-height: 100vh;
         }
         
-        .futuristic-bg::before {
+        body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -26,6 +26,8 @@
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
             animation: pulse 4s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 1;
         }
         
         @keyframes pulse {
@@ -89,9 +91,9 @@
         }
     </style>
 </head>
-<body class="futuristic-bg min-h-screen text-white font-inter">
+<body class="text-white font-inter" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #2d1b69 50%, #1a1a3e 75%, #0f0f23 100%); background-attachment: fixed; min-height: 100vh; position: relative;">
     <!-- Navigation -->
-    <nav class="relative z-50 p-6">
+    <nav class="relative z-50 p-6" style="position: relative; z-index: 10;">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
                 <div class="w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center">
@@ -112,7 +114,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative z-10 px-6 py-20">
+    <section class="relative px-6 py-20" style="position: relative; z-index: 10;">
         <div class="max-w-7xl mx-auto text-center">
             <div class="slide-in">
                 <h1 class="font-orbitron font-black text-5xl md:text-7xl mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
@@ -135,7 +137,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="relative z-10 px-6 py-16">
+    <section class="relative px-6 py-16" style="position: relative; z-index: 10;">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="hologram rounded-xl p-6 text-center floating" style="animation-delay: 0s;">
@@ -163,16 +165,16 @@
     </section>
 
     <!-- Learning Modules -->
-    <section class="relative z-10 px-6 py-16">
+    <section class="relative px-6 py-16" style="position: relative; z-index: 10;">
         <div class="max-w-7xl mx-auto">
             <h2 class="font-orbitron font-bold text-4xl text-center mb-12 text-cyan-400">
                 MODUL PEMBELAJARAN
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Module 1 -->
-                <div class="hologram rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer group">
+                <div class="hologram rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer group" onclick="window.open('https://atengsani.github.io/pkk/kegiatanproduksi.html', '_blank')">
                     <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl">💡</div>
+                        <div class="text-3xl">🏭</div>
                         <div class="w-16 h-16">
                             <svg class="progress-ring w-16 h-16">
                                 <circle class="progress-ring-circle stroke-cyan-400" stroke-width="4" fill="transparent" r="40" cx="32" cy="32" style="stroke-dashoffset: 125.6;"></circle>
@@ -180,8 +182,8 @@
                             <div class="absolute inset-0 flex items-center justify-center text-sm font-bold">75%</div>
                         </div>
                     </div>
-                    <h3 class="font-bold text-xl mb-2 group-hover:text-cyan-400 transition-colors">Ide Kreatif & Inovasi</h3>
-                    <p class="text-gray-300 text-sm mb-4">Pelajari cara mengembangkan ide kreatif menjadi konsep produk yang inovatif dan marketable.</p>
+                    <h3 class="font-bold text-xl mb-2 group-hover:text-cyan-400 transition-colors">Kegiatan Produksi</h3>
+                    <p class="text-gray-300 text-sm mb-4">Pelajari proses produksi dari perencanaan hingga pengawasan kualitas dalam menghasilkan produk.</p>
                     <div class="flex justify-between items-center">
                         <span class="text-xs text-gray-400">8 dari 12 materi</span>
                         <button class="bg-cyan-500 hover:bg-cyan-600 px-4 py-2 rounded-full text-sm transition-colors">
@@ -299,7 +301,7 @@
     </section>
 
     <!-- Quick Actions -->
-    <section class="relative z-10 px-6 py-16">
+    <section class="relative px-6 py-16" style="position: relative; z-index: 10;">
         <div class="max-w-7xl mx-auto">
             <h2 class="font-orbitron font-bold text-4xl text-center mb-12 text-cyan-400">
                 AKSI CEPAT
@@ -333,7 +335,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="relative z-10 px-6 py-12 border-t border-gray-700">
+    <footer class="relative px-6 py-12 border-t border-gray-700" style="position: relative; z-index: 10;">
         <div class="max-w-7xl mx-auto text-center">
             <div class="flex items-center justify-center space-x-4 mb-6">
                 <div class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center">
@@ -435,5 +437,5 @@
         `;
         document.head.appendChild(style);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ccdddcc3c7cde6',t:'MTc1NzQ4NTcyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cf3574051edfc6',t:'MTc1NzUxMDI4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
