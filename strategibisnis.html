@@ -383,40 +383,7 @@
         </div>
     </section>
 
-    <!-- Interactive Metrics Dashboard -->
-    <section id="dashboard" class="relative z-10 py-16 px-6">
-        <div class="max-w-7xl mx-auto">
-            <h3 class="text-3xl font-orbitron font-bold mb-12 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-                Dashboard Performa Real-time
-            </h3>
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="metric-card glass-effect p-6 rounded-2xl text-center" onclick="animateMetric(this)">
-                    <div class="text-4xl mb-4">📈</div>
-                    <h4 class="text-lg font-semibold mb-2 text-green-400">Pertumbuhan Bulanan</h4>
-                    <div class="text-3xl font-bold text-white" id="growth-metric">12.5%</div>
-                    <p class="text-sm text-gray-400 mt-2">vs bulan lalu</p>
-                </div>
-                <div class="metric-card glass-effect p-6 rounded-2xl text-center" onclick="animateMetric(this)">
-                    <div class="text-4xl mb-4">🎯</div>
-                    <h4 class="text-lg font-semibold mb-2 text-blue-400">Target Tercapai</h4>
-                    <div class="text-3xl font-bold text-white" id="target-metric">87%</div>
-                    <p class="text-sm text-gray-400 mt-2">dari target tahunan</p>
-                </div>
-                <div class="metric-card glass-effect p-6 rounded-2xl text-center" onclick="animateMetric(this)">
-                    <div class="text-4xl mb-4">👥</div>
-                    <h4 class="text-lg font-semibold mb-2 text-purple-400">Klien Aktif</h4>
-                    <div class="text-3xl font-bold text-white" id="client-metric">1,247</div>
-                    <p class="text-sm text-gray-400 mt-2">petani terdaftar</p>
-                </div>
-                <div class="metric-card glass-effect p-6 rounded-2xl text-center" onclick="animateMetric(this)">
-                    <div class="text-4xl mb-4">⭐</div>
-                    <h4 class="text-lg font-semibold mb-2 text-yellow-400">Rating Kepuasan</h4>
-                    <div class="text-3xl font-bold text-white" id="rating-metric">4.8/5</div>
-                    <p class="text-sm text-gray-400 mt-2">dari 500+ review</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Navigation Buttons - Fixed Footer -->
     <div class="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-slate-900/95 to-slate-800/90 backdrop-blur-lg border-t border-white/10 py-4 px-6">
@@ -490,25 +457,7 @@
             }
         }
 
-        // Animate metrics
-        function animateMetric(element) {
-            element.style.transform = 'scale(1.1)';
-            element.style.boxShadow = '0 0 30px rgba(34, 197, 94, 0.5)';
-            
-            setTimeout(() => {
-                element.style.transform = 'scale(1)';
-                element.style.boxShadow = '';
-            }, 300);
-            
-            // Simulate real-time data update
-            const metricElement = element.querySelector('[id$="-metric"]');
-            const currentValue = metricElement.textContent;
-            metricElement.style.color = '#22c55e';
-            
-            setTimeout(() => {
-                metricElement.style.color = '';
-            }, 1000);
-        }
+
 
         // Contact form
         function showContactForm() {
@@ -543,21 +492,7 @@
             }
         });
 
-        // Auto-update metrics simulation
-        setInterval(() => {
-            const growthMetric = document.getElementById('growth-metric');
-            const targetMetric = document.getElementById('target-metric');
-            const clientMetric = document.getElementById('client-metric');
-            
-            // Simulate small changes
-            const growth = (Math.random() * 5 + 10).toFixed(1);
-            const target = Math.floor(Math.random() * 10 + 85);
-            const clients = Math.floor(Math.random() * 50 + 1200);
-            
-            growthMetric.textContent = growth + '%';
-            targetMetric.textContent = target + '%';
-            clientMetric.textContent = clients.toLocaleString();
-        }, 10000); // Update every 10 seconds
+
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cfeeb51447cde6',t:'MTc1NzUxNzg2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cff1696727cde6',t:'MTc1NzUxNzk3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
