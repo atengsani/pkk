@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Peluang Usaha Produksi Benih Tanaman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+        
+        .futuristic-bg {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%);
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .futuristic-bg::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(120, 219, 255, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(120, 219, 255, 0.8); }
+        }
+        
+        .floating { animation: float 3s ease-in-out infinite; }
+        .glow { animation: glow 2s ease-in-out infinite; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 10px rgba(120, 219, 255, 0.8);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            stroke-dasharray: 251.2;
+            stroke-dashoffset: 251.2;
+            transition: stroke-dashoffset 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="futuristic-bg min-h-screen text-white font-inter">
+    <!-- Header -->
+    <header class="relative z-10 p-6">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="font-orbitron font-black text-4xl md:text-6xl text-center neon-text mb-4">
+                🌱 AGRI-FUTURE ACADEMY
+            </h1>
+            <p class="text-center text-xl text-blue-200 font-light">
+                Analisis Peluang Usaha Produksi Benih Tanaman
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-7xl mx-auto px-6 py-8 pb-20">
+        <!-- Learning Objectives -->
+        <section class="mb-12">
+            <div class="glass-card rounded-2xl p-8 floating">
+                <h2 class="font-orbitron font-bold text-2xl mb-6 text-cyan-300">🎯 Tujuan Pembelajaran</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-green-400 rounded-full glow"></div>
+                            <span>Mengidentifikasi jenis-jenis benih tanaman potensial</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-blue-400 rounded-full glow"></div>
+                            <span>Menganalisis faktor-faktor yang mempengaruhi peluang usaha</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-purple-400 rounded-full glow"></div>
+                            <span>Menghitung proyeksi keuntungan dan risiko bisnis</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-pink-400 rounded-full glow"></div>
+                            <span>Merancang strategi pemasaran benih tanaman</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Modules -->
+        <section class="mb-12">
+            <h2 class="font-orbitron font-bold text-3xl mb-8 text-center neon-text">📚 Modul Pembelajaran Interaktif</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Module 1 -->
+                <div class="glass-card rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer" onclick="openModule(1)">
+                    <div class="text-4xl mb-4">🔬</div>
+                    <h3 class="font-orbitron font-bold text-xl mb-3 text-cyan-300">Riset Pasar Benih</h3>
+                    <p class="text-sm text-gray-300 mb-4">Pelajari cara menganalisis permintaan pasar dan tren benih tanaman</p>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full w-0" id="progress-1"></div>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="glass-card rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer" onclick="openModule(2)">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="font-orbitron font-bold text-xl mb-3 text-green-300">Analisis Finansial</h3>
+                    <p class="text-sm text-gray-300 mb-4">Hitung modal, biaya produksi, dan proyeksi keuntungan</p>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-green-400 to-emerald-500 h-2 rounded-full w-0" id="progress-2"></div>
+                    </div>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="glass-card rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer" onclick="openModule(3)">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="font-orbitron font-bold text-xl mb-3 text-purple-300">Strategi Bisnis</h3>
+                    <p class="text-sm text-gray-300 mb-4">Kembangkan rencana bisnis dan strategi pemasaran</p>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-purple-400 to-pink-500 h-2 rounded-full w-0" id="progress-3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Calculator -->
+        <section class="mb-12">
+            <div class="glass-card rounded-2xl p-8">
+                <h2 class="font-orbitron font-bold text-2xl mb-6 text-center neon-text">🧮 Kalkulator Peluang Usaha</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Jenis Benih</label>
+                            <select id="seedType" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-2 text-white">
+                                <option value="sayuran">Sayuran (Tomat, Cabai, dll)</option>
+                                <option value="buah">Buah-buahan (Melon, Semangka, dll)</option>
+                                <option value="hias">Tanaman Hias</option>
+                                <option value="herbal">Tanaman Herbal</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Modal Awal (Rp)</label>
+                            <input type="number" id="initialCapital" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-2 text-white" placeholder="10000000">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Target Produksi (kg/bulan)</label>
+                            <input type="number" id="production" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-2 text-white" placeholder="1000">
+                        </div>
+                        <button onclick="calculateBusiness()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 px-6 py-3 rounded-lg font-semibold transition-all glow">
+                            Hitung Peluang Usaha
+                        </button>
+                    </div>
+                    <div id="calculationResult" class="space-y-4 hidden">
+                        <h3 class="font-orbitron font-bold text-xl text-green-300">Hasil Analisis:</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span>Potensi Keuntungan/Bulan:</span>
+                                <span id="monthlyProfit" class="text-green-400 font-bold"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>ROI (Return on Investment):</span>
+                                <span id="roi" class="text-blue-400 font-bold"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Break Even Point:</span>
+                                <span id="bep" class="text-yellow-400 font-bold"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Tingkat Risiko:</span>
+                                <span id="riskLevel" class="font-bold"></span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>Skor Peluang Usaha</span>
+                                <span id="scoreText">0/100</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-4">
+                                <div id="scoreBar" class="bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 h-4 rounded-full transition-all duration-1000 w-0"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Trends -->
+        <section class="mb-12">
+            <div class="glass-card rounded-2xl p-8">
+                <h2 class="font-orbitron font-bold text-2xl mb-6 text-center neon-text">📈 Tren Pasar Benih 2024</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🥬</div>
+                        <h4 class="font-semibold text-green-300">Sayuran Organik</h4>
+                        <p class="text-2xl font-bold text-green-400">+35%</p>
+                        <p class="text-sm text-gray-400">Pertumbuhan permintaan</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🌿</div>
+                        <h4 class="font-semibold text-blue-300">Tanaman Hias</h4>
+                        <p class="text-2xl font-bold text-blue-400">+28%</p>
+                        <p class="text-sm text-gray-400">Tren urban farming</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🌶️</div>
+                        <h4 class="font-semibold text-red-300">Cabai Hibrida</h4>
+                        <p class="text-2xl font-bold text-red-400">+42%</p>
+                        <p class="text-sm text-gray-400">Permintaan industri</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🌱</div>
+                        <h4 class="font-semibold text-purple-300">Herbal Medis</h4>
+                        <p class="text-2xl font-bold text-purple-400">+55%</p>
+                        <p class="text-sm text-gray-400">Kesadaran kesehatan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="mb-12">
+            <div class="glass-card rounded-2xl p-8">
+                <h2 class="font-orbitron font-bold text-2xl mb-6 text-center neon-text">🧠 Kuis Interaktif</h2>
+                <div id="quizContainer">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-4" id="questionText">Faktor apa yang paling mempengaruhi keberhasilan usaha produksi benih?</h3>
+                        <div class="space-y-3">
+                            <button class="quiz-option w-full text-left p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors" onclick="selectAnswer(0)">
+                                A. Kualitas benih dan sertifikasi
+                            </button>
+                            <button class="quiz-option w-full text-left p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors" onclick="selectAnswer(1)">
+                                B. Harga yang murah
+                            </button>
+                            <button class="quiz-option w-full text-left p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors" onclick="selectAnswer(2)">
+                                C. Kemasan yang menarik
+                            </button>
+                            <button class="quiz-option w-full text-left p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors" onclick="selectAnswer(3)">
+                                D. Lokasi toko yang strategis
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm text-gray-400">
+                            Pertanyaan <span id="currentQuestion">1</span> dari <span id="totalQuestions">5</span>
+                        </div>
+                        <div class="text-sm text-gray-400">
+                            Skor: <span id="quizScore" class="text-green-400 font-bold">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let quizScore = 0;
+        
+        const questions = [
+            {
+                question: "Faktor apa yang paling mempengaruhi keberhasilan usaha produksi benih?",
+                options: ["A. Kualitas benih dan sertifikasi", "B. Harga yang murah", "C. Kemasan yang menarik", "D. Lokasi toko yang strategis"],
+                correct: 0
+            },
+            {
+                question: "Berapa persen rata-rata margin keuntungan dalam bisnis benih tanaman?",
+                options: ["A. 10-20%", "B. 30-50%", "C. 60-80%", "D. 90-100%"],
+                correct: 1
+            },
+            {
+                question: "Kapan waktu terbaik untuk memulai produksi benih sayuran?",
+                options: ["A. Musim hujan", "B. Musim kemarau", "C. 2-3 bulan sebelum musim tanam", "D. Kapan saja"],
+                correct: 2
+            },
+            {
+                question: "Apa yang dimaksud dengan benih hibrida?",
+                options: ["A. Benih yang dimodifikasi genetik", "B. Benih hasil persilangan dua varietas", "C. Benih organik", "D. Benih impor"],
+                correct: 1
+            },
+            {
+                question: "Berapa lama rata-rata masa simpan benih sayuran?",
+                options: ["A. 6 bulan", "B. 1-2 tahun", "C. 3-5 tahun", "D. 10 tahun"],
+                correct: 1
+            }
+        ];
+
+        function openModule(moduleNumber) {
+            const progressBar = document.getElementById(`progress-${moduleNumber}`);
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width += 2;
+                    progressBar.style.width = width + '%';
+                }
+            }, 20);
+            
+            alert(`Membuka Modul ${moduleNumber}! Dalam implementasi nyata, ini akan membuka konten pembelajaran interaktif.`);
+        }
+
+        function calculateBusiness() {
+            const seedType = document.getElementById('seedType').value;
+            const capital = parseFloat(document.getElementById('initialCapital').value) || 0;
+            const production = parseFloat(document.getElementById('production').value) || 0;
+            
+            if (capital === 0 || production === 0) {
+                alert('Mohon isi semua field dengan benar!');
+                return;
+            }
+            
+            // Simulasi perhitungan berdasarkan jenis benih
+            const pricePerKg = {
+                'sayuran': 25000,
+                'buah': 35000,
+                'hias': 45000,
+                'herbal': 55000
+            };
+            
+            const costPerKg = {
+                'sayuran': 15000,
+                'buah': 20000,
+                'hias': 25000,
+                'herbal': 30000
+            };
+            
+            const riskLevel = {
+                'sayuran': 'Rendah',
+                'buah': 'Sedang',
+                'hias': 'Sedang',
+                'herbal': 'Tinggi'
+            };
+            
+            const revenue = production * pricePerKg[seedType];
+            const cost = production * costPerKg[seedType];
+            const monthlyProfit = revenue - cost;
+            const roi = ((monthlyProfit * 12) / capital * 100).toFixed(1);
+            const bep = (capital / monthlyProfit).toFixed(1);
+            
+            // Hitung skor peluang usaha (0-100)
+            let score = 0;
+            if (roi > 50) score += 30;
+            else if (roi > 30) score += 20;
+            else if (roi > 15) score += 10;
+            
+            if (bep < 12) score += 25;
+            else if (bep < 24) score += 15;
+            else if (bep < 36) score += 5;
+            
+            if (seedType === 'herbal') score += 20;
+            else if (seedType === 'hias') score += 15;
+            else if (seedType === 'buah') score += 10;
+            else score += 5;
+            
+            score += Math.min(25, production / 100 * 5); // Bonus untuk produksi tinggi
+            
+            // Tampilkan hasil
+            document.getElementById('monthlyProfit').textContent = `Rp ${monthlyProfit.toLocaleString('id-ID')}`;
+            document.getElementById('roi').textContent = `${roi}%`;
+            document.getElementById('bep').textContent = `${bep} bulan`;
+            document.getElementById('riskLevel').textContent = riskLevel[seedType];
+            document.getElementById('riskLevel').className = `font-bold ${riskLevel[seedType] === 'Rendah' ? 'text-green-400' : riskLevel[seedType] === 'Sedang' ? 'text-yellow-400' : 'text-red-400'}`;
+            
+            document.getElementById('scoreText').textContent = `${Math.round(score)}/100`;
+            document.getElementById('scoreBar').style.width = `${score}%`;
+            
+            document.getElementById('calculationResult').classList.remove('hidden');
+        }
+
+        function selectAnswer(selectedIndex) {
+            const currentQuestion = questions[currentQuestionIndex];
+            const options = document.querySelectorAll('.quiz-option');
+            
+            // Reset semua opsi
+            options.forEach(option => {
+                option.classList.remove('bg-green-600', 'bg-red-600');
+                option.classList.add('bg-gray-800');
+            });
+            
+            // Tandai jawaban yang dipilih
+            if (selectedIndex === currentQuestion.correct) {
+                options[selectedIndex].classList.remove('bg-gray-800');
+                options[selectedIndex].classList.add('bg-green-600');
+                quizScore += 20;
+            } else {
+                options[selectedIndex].classList.remove('bg-gray-800');
+                options[selectedIndex].classList.add('bg-red-600');
+                options[currentQuestion.correct].classList.remove('bg-gray-800');
+                options[currentQuestion.correct].classList.add('bg-green-600');
+            }
+            
+            document.getElementById('quizScore').textContent = quizScore;
+            
+            // Pindah ke pertanyaan berikutnya setelah 2 detik
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    showQuizResult();
+                }
+            }, 2000);
+        }
+
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach((option, index) => {
+                option.textContent = question.options[index];
+                option.classList.remove('bg-green-600', 'bg-red-600');
+                option.classList.add('bg-gray-800');
+            });
+        }
+
+        function showQuizResult() {
+            const percentage = (quizScore / (questions.length * 20)) * 100;
+            let message = '';
+            
+            if (percentage >= 80) {
+                message = '🎉 Excellent! Anda memahami konsep dengan sangat baik!';
+            } else if (percentage >= 60) {
+                message = '👍 Good! Pemahaman Anda cukup baik, terus belajar!';
+            } else {
+                message = '📚 Perlu belajar lebih lanjut. Ulangi materi dan coba lagi!';
+            }
+            
+            document.getElementById('quizContainer').innerHTML = `
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold mb-4 text-cyan-300">Hasil Kuis</h3>
+                    <div class="text-4xl font-bold mb-4 text-green-400">${quizScore}/100</div>
+                    <p class="text-lg mb-6">${message}</p>
+                    <button onclick="restartQuiz()" class="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 px-6 py-3 rounded-lg font-semibold transition-all glow">
+                        Ulangi Kuis
+                    </button>
+                </div>
+            `;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            quizScore = 0;
+            document.getElementById('quizScore').textContent = '0';
+            
+            document.getElementById('quizContainer').innerHTML = `
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-4" id="questionText"></h3>
+                    <div class="space-y-3">
+                        <button class="quiz-option w-full text-left p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors" onclick="selectAnswer(0)"></button>
+                        <button class="quiz-option w-full text-left p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors" onclick="selectAnswer(1)"></button>
+                        <button class="quiz-option w-full text-left p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors" onclick="selectAnswer(2)"></button>
+                        <button class="quiz-option w-full text-left p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors" onclick="selectAnswer(3)"></button>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="text-sm text-gray-400">
+                        Pertanyaan <span id="currentQuestion">1</span> dari <span id="totalQuestions">5</span>
+                    </div>
+                    <div class="text-sm text-gray-400">
+                        Skor: <span id="quizScore" class="text-green-400 font-bold">0</span>
+                    </div>
+                </div>
+            `;
+            
+            loadQuestion();
+        }
+
+        // Initialize quiz
+        document.getElementById('totalQuestions').textContent = questions.length;
+        loadQuestion();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cce22415799d00',t:'MTc1NzQ4NTg5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
