@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKK Learning Hub - SMK Negeri 1 Pante Ceureumen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+        
+        .futuristic-bg {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #2d1b69 50%, #1a1a3e 75%, #0f0f23 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .futuristic-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .neon-border {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff00, #ffff00) border-box;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.5), 0 0 40px rgba(0, 245, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .neon-glow:hover {
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.8), 0 0 60px rgba(0, 245, 255, 0.5);
+            transform: translateY(-5px);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .hologram {
+            background: linear-gradient(45deg, rgba(0, 245, 255, 0.1), rgba(255, 0, 255, 0.1));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            stroke-dasharray: 251.2;
+            stroke-dashoffset: 251.2;
+            transition: stroke-dashoffset 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="futuristic-bg min-h-screen text-white font-inter">
+    <!-- Navigation -->
+    <nav class="relative z-50 p-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center">
+                    <span class="text-xl font-bold">🎓</span>
+                </div>
+                <div>
+                    <h1 class="font-orbitron font-bold text-xl text-cyan-400">PKK LEARNING HUB</h1>
+                    <p class="text-xs text-gray-300">SMK Negeri 1 Pante Ceureumen</p>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-cyan-400 transition-colors">Beranda</a>
+                <a href="#" class="hover:text-cyan-400 transition-colors">Materi</a>
+                <a href="#" class="hover:text-cyan-400 transition-colors">Tugas</a>
+                <a href="#" class="hover:text-cyan-400 transition-colors">Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 px-6 py-20">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="slide-in">
+                <h1 class="font-orbitron font-black text-5xl md:text-7xl mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    PRODUK KREATIF<br>KEWIRAUSAHAAN
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    Jelajahi dunia kewirausahaan digital dengan teknologi masa depan. 
+                    Kembangkan ide kreatifmu menjadi produk inovatif!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="neon-glow bg-gradient-to-r from-cyan-500 to-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform">
+                        🚀 Mulai Belajar
+                    </button>
+                    <button class="hologram px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform">
+                        📊 Lihat Progress
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="relative z-10 px-6 py-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="hologram rounded-xl p-6 text-center floating" style="animation-delay: 0s;">
+                    <div class="text-3xl mb-2">📚</div>
+                    <div class="text-2xl font-bold text-cyan-400" id="materiCount">0</div>
+                    <div class="text-sm text-gray-300">Materi Pembelajaran</div>
+                </div>
+                <div class="hologram rounded-xl p-6 text-center floating" style="animation-delay: 0.5s;">
+                    <div class="text-3xl mb-2">🎯</div>
+                    <div class="text-2xl font-bold text-purple-400" id="tugasCount">0</div>
+                    <div class="text-sm text-gray-300">Tugas Selesai</div>
+                </div>
+                <div class="hologram rounded-xl p-6 text-center floating" style="animation-delay: 1s;">
+                    <div class="text-3xl mb-2">👥</div>
+                    <div class="text-2xl font-bold text-pink-400" id="siswaCount">0</div>
+                    <div class="text-sm text-gray-300">Siswa Aktif</div>
+                </div>
+                <div class="hologram rounded-xl p-6 text-center floating" style="animation-delay: 1.5s;">
+                    <div class="text-3xl mb-2">🏆</div>
+                    <div class="text-2xl font-bold text-yellow-400" id="achievementCount">0</div>
+                    <div class="text-sm text-gray-300">Pencapaian</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Modules -->
+    <section class="relative z-10 px-6 py-16">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-orbitron font-bold text-4xl text-center mb-12 text-cyan-400">
+                MODUL PEMBELAJARAN
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Module 1 -->
+                <div class="hologram rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">💡</div>
+                        <div class="w-16 h-16">
+                            <svg class="progress-ring w-16 h-16">
+                                <circle class="progress-ring-circle stroke-cyan-400" stroke-width="4" fill="transparent" r="40" cx="32" cy="32" style="stroke-dashoffset: 125.6;"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center text-sm font-bold">75%</div>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 group-hover:text-cyan-400 transition-colors">Ide Kreatif & Inovasi</h3>
+                    <p class="text-gray-300 text-sm mb-4">Pelajari cara mengembangkan ide kreatif menjadi konsep produk yang inovatif dan marketable.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-400">8 dari 12 materi</span>
+                        <button class="bg-cyan-500 hover:bg-cyan-600 px-4 py-2 rounded-full text-sm transition-colors">
+                            Lanjutkan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="hologram rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">📊</div>
+                        <div class="w-16 h-16">
+                            <svg class="progress-ring w-16 h-16">
+                                <circle class="progress-ring-circle stroke-purple-400" stroke-width="4" fill="transparent" r="40" cx="32" cy="32" style="stroke-dashoffset: 175.84;"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center text-sm font-bold">30%</div>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 group-hover:text-purple-400 transition-colors">Analisis Pasar</h3>
+                    <p class="text-gray-300 text-sm mb-4">Memahami target market, kompetitor, dan strategi positioning produk di pasar.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-400">3 dari 10 materi</span>
+                        <button class="bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded-full text-sm transition-colors">
+                            Mulai
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="hologram rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">🎨</div>
+                        <div class="w-16 h-16">
+                            <svg class="progress-ring w-16 h-16">
+                                <circle class="progress-ring-circle stroke-pink-400" stroke-width="4" fill="transparent" r="40" cx="32" cy="32" style="stroke-dashoffset: 251.2;"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center text-sm font-bold">0%</div>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 group-hover:text-pink-400 transition-colors">Desain Produk</h3>
+                    <p class="text-gray-300 text-sm mb-4">Prinsip desain produk yang menarik, fungsional, dan sesuai dengan kebutuhan konsumen.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-400">0 dari 15 materi</span>
+                        <button class="bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded-full text-sm transition-colors">
+                            Terkunci
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="hologram rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">💰</div>
+                        <div class="w-16 h-16">
+                            <svg class="progress-ring w-16 h-16">
+                                <circle class="progress-ring-circle stroke-yellow-400" stroke-width="4" fill="transparent" r="40" cx="32" cy="32" style="stroke-dashoffset: 251.2;"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center text-sm font-bold">0%</div>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 group-hover:text-yellow-400 transition-colors">Strategi Pemasaran</h3>
+                    <p class="text-gray-300 text-sm mb-4">Teknik pemasaran digital dan konvensional untuk meningkatkan penjualan produk.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-400">0 dari 12 materi</span>
+                        <button class="bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded-full text-sm transition-colors">
+                            Terkunci
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="hologram rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">📈</div>
+                        <div class="w-16 h-16">
+                            <svg class="progress-ring w-16 h-16">
+                                <circle class="progress-ring-circle stroke-green-400" stroke-width="4" fill="transparent" r="40" cx="32" cy="32" style="stroke-dashoffset: 251.2;"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center text-sm font-bold">0%</div>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 group-hover:text-green-400 transition-colors">Manajemen Bisnis</h3>
+                    <p class="text-gray-300 text-sm mb-4">Pengelolaan keuangan, operasional, dan sumber daya dalam menjalankan bisnis.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-400">0 dari 14 materi</span>
+                        <button class="bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded-full text-sm transition-colors">
+                            Terkunci
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="hologram rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl">🚀</div>
+                        <div class="w-16 h-16">
+                            <svg class="progress-ring w-16 h-16">
+                                <circle class="progress-ring-circle stroke-red-400" stroke-width="4" fill="transparent" r="40" cx="32" cy="32" style="stroke-dashoffset: 251.2;"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center text-sm font-bold">0%</div>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 group-hover:text-red-400 transition-colors">Proyek Akhir</h3>
+                    <p class="text-gray-300 text-sm mb-4">Implementasi semua pembelajaran dalam bentuk proyek bisnis nyata yang dapat dipresentasikan.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-400">0 dari 5 tahap</span>
+                        <button class="bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded-full text-sm transition-colors">
+                            Terkunci
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="relative z-10 px-6 py-16">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-orbitron font-bold text-4xl text-center mb-12 text-cyan-400">
+                AKSI CEPAT
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <button class="hologram rounded-xl p-6 text-center hover:scale-105 transition-transform group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">📝</div>
+                    <h3 class="font-bold text-lg mb-2">Tugas Terbaru</h3>
+                    <p class="text-sm text-gray-300">Lihat dan kerjakan tugas yang belum selesai</p>
+                </button>
+                
+                <button class="hologram rounded-xl p-6 text-center hover:scale-105 transition-transform group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">💬</div>
+                    <h3 class="font-bold text-lg mb-2">Forum Diskusi</h3>
+                    <p class="text-sm text-gray-300">Diskusi dengan teman dan guru</p>
+                </button>
+                
+                <button class="hologram rounded-xl p-6 text-center hover:scale-105 transition-transform group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">📊</div>
+                    <h3 class="font-bold text-lg mb-2">Laporan Nilai</h3>
+                    <p class="text-sm text-gray-300">Cek progress dan nilai pembelajaran</p>
+                </button>
+                
+                <button class="hologram rounded-xl p-6 text-center hover:scale-105 transition-transform group">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🎯</div>
+                    <h3 class="font-bold text-lg mb-2">Target Belajar</h3>
+                    <p class="text-sm text-gray-300">Atur dan pantau target pembelajaran</p>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 px-6 py-12 border-t border-gray-700">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="flex items-center justify-center space-x-4 mb-6">
+                <div class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center">
+                    <span class="text-lg font-bold">🎓</span>
+                </div>
+                <div>
+                    <h3 class="font-orbitron font-bold text-lg text-cyan-400">PKK Learning Hub</h3>
+                    <p class="text-sm text-gray-300">SMK Negeri 1 Pante Ceureumen</p>
+                </div>
+            </div>
+            <p class="text-gray-400 text-sm">
+                © 2024 SMK Negeri 1 Pante Ceureumen. Masa depan kewirausahaan dimulai dari sini.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Counter animation
+        function animateCounter(elementId, targetValue, duration = 2000) {
+            const element = document.getElementById(elementId);
+            const startValue = 0;
+            const increment = targetValue / (duration / 16);
+            let currentValue = startValue;
+            
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= targetValue) {
+                    currentValue = targetValue;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(currentValue);
+            }, 16);
+        }
+
+        // Initialize counters when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                animateCounter('materiCount', 24);
+                animateCounter('tugasCount', 18);
+                animateCounter('siswaCount', 156);
+                animateCounter('achievementCount', 42);
+            }, 500);
+        });
+
+        // Add interactive hover effects
+        document.querySelectorAll('.hologram').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+                card.style.boxShadow = '0 20px 40px rgba(0, 245, 255, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = 'none';
+            });
+        });
+
+        // Add click effects to buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = button.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                button.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            button { position: relative; overflow: hidden; }
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ccdddcc3c7cde6',t:'MTc1NzQ4NTcyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

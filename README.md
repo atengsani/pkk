@@ -1,2 +1,0 @@
-# pkk
-belajar PKK SMK
