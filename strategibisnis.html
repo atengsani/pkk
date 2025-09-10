@@ -1,1 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriSeed Future - Rencana Bisnis Produksi Benih</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .futuristic-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .futuristic-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(34, 197, 94, 0.6); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-glow { animation: glow 2s ease-in-out infinite; }
+        .animate-slide-in { animation: slideIn 0.8s ease-out forwards; }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .neon-border {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #22c55e, #3b82f6, #a855f7) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: exclude;
+        }
+        
+        .hologram {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hologram::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .tab-active {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+        
+        .metric-card {
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="futuristic-bg min-h-screen text-white font-inter">
+
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative z-10 py-20 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="animate-float">
+                <h2 class="text-4xl md:text-6xl font-orbitron font-black mb-4 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                    🌱 AGRI-FUTURE ACADEMY
+                </h2>
+                <h3 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-200">
+                    Analisis Peluang Usaha Produksi Benih Tanaman
+                </h3>
+
+            </div>
+            <button onclick="scrollToSection('business-plan')" class="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 animate-glow">
+                Jelajahi Rencana Bisnis
+            </button>
+        </div>
+    </section>
+
+    <!-- Interactive Tabs -->
+    <section id="business-plan" class="relative z-10 py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-wrap justify-center mb-12 space-x-2 space-y-2">
+                <button onclick="showTab('overview')" id="tab-overview" class="tab-button px-6 py-3 rounded-full font-semibold transition-all duration-300 tab-active">
+                    Gambaran Umum
+                </button>
+                <button onclick="showTab('production')" id="tab-production" class="tab-button px-6 py-3 rounded-full font-semibold transition-all duration-300 glass-effect hover:bg-white/20">
+                    Produksi
+                </button>
+                <button onclick="showTab('marketing')" id="tab-marketing" class="tab-button px-6 py-3 rounded-full font-semibold transition-all duration-300 glass-effect hover:bg-white/20">
+                    Pemasaran
+                </button>
+                <button onclick="showTab('financial')" id="tab-financial" class="tab-button px-6 py-3 rounded-full font-semibold transition-all duration-300 glass-effect hover:bg-white/20">
+                    Keuangan
+                </button>
+                <button onclick="showTab('technology')" id="tab-technology" class="tab-button px-6 py-3 rounded-full font-semibold transition-all duration-300 glass-effect hover:bg-white/20">
+                    Teknologi
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="tab-content" class="glass-effect rounded-3xl p-8 hologram">
+                <!-- Overview Tab -->
+                <div id="overview-content" class="tab-content">
+                    <h3 class="text-3xl font-orbitron font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                        Visi Masa Depan Produksi Benih
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-green-400">🎯 Misi Perusahaan</h4>
+                                <p class="text-gray-300">Mengembangkan benih berkualitas tinggi dengan teknologi terdepan untuk mendukung ketahanan pangan global</p>
+                            </div>
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-blue-400">🌱 Target Pasar</h4>
+                                <p class="text-gray-300">Petani komersial, koperasi pertanian, dan distributor benih di seluruh Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-purple-400">📈 Proyeksi Pertumbuhan</h4>
+                                <div class="text-2xl font-bold text-green-400 mb-2">150% dalam 3 tahun</div>
+                                <p class="text-gray-300">Pertumbuhan pasar benih premium di Indonesia</p>
+                            </div>
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-yellow-400">🏆 Keunggulan Kompetitif</h4>
+                                <p class="text-gray-300">Teknologi AI untuk seleksi benih dan sistem kontrol kualitas otomatis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Production Tab -->
+                <div id="production-content" class="tab-content hidden">
+                    <h3 class="text-3xl font-orbitron font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                        Strategi Produksi Inovatif
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="metric-card glass-effect p-6 rounded-2xl text-center">
+                            <div class="text-4xl mb-4">🏭</div>
+                            <h4 class="text-xl font-semibold mb-3 text-green-400">Fasilitas Modern</h4>
+                            <p class="text-gray-300">Greenhouse otomatis dengan kontrol iklim presisi</p>
+                            <div class="mt-4 text-2xl font-bold text-blue-400">5,000 m²</div>
+                        </div>
+                        <div class="metric-card glass-effect p-6 rounded-2xl text-center">
+                            <div class="text-4xl mb-4">⚡</div>
+                            <h4 class="text-xl font-semibold mb-3 text-blue-400">Kapasitas Produksi</h4>
+                            <p class="text-gray-300">Produksi benih berkualitas tinggi per tahun</p>
+                            <div class="mt-4 text-2xl font-bold text-green-400">50 Ton</div>
+                        </div>
+                        <div class="metric-card glass-effect p-6 rounded-2xl text-center">
+                            <div class="text-4xl mb-4">🔬</div>
+                            <h4 class="text-xl font-semibold mb-3 text-purple-400">Kontrol Kualitas</h4>
+                            <p class="text-gray-300">Tingkat kemurnian dan daya kecambah</p>
+                            <div class="mt-4 text-2xl font-bold text-yellow-400">99.5%</div>
+                        </div>
+                    </div>
+                    <div class="mt-8 glass-effect p-6 rounded-2xl">
+                        <h4 class="text-xl font-semibold mb-4 text-center">Proses Produksi Terintegrasi</h4>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <div class="bg-gradient-to-r from-green-500 to-green-600 px-4 py-2 rounded-full">1. Seleksi Induk</div>
+                            <div class="text-2xl">→</div>
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-4 py-2 rounded-full">2. Penyerbukan</div>
+                            <div class="text-2xl">→</div>
+                            <div class="bg-gradient-to-r from-purple-500 to-purple-600 px-4 py-2 rounded-full">3. Pemanenan</div>
+                            <div class="text-2xl">→</div>
+                            <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 px-4 py-2 rounded-full">4. Pengolahan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marketing Tab -->
+                <div id="marketing-content" class="tab-content hidden">
+                    <h3 class="text-3xl font-orbitron font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                        Strategi Pemasaran Digital
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-green-400">🎯 Segmentasi Pasar</h4>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Petani komersial skala besar (40%)</li>
+                                    <li>• Koperasi pertanian (35%)</li>
+                                    <li>• Distributor regional (25%)</li>
+                                </ul>
+                            </div>
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-blue-400">📱 Platform Digital</h4>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• E-commerce B2B</li>
+                                    <li>• Aplikasi mobile untuk petani</li>
+                                    <li>• Sistem CRM terintegrasi</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-purple-400">💰 Strategi Harga</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span>Benih Premium</span>
+                                        <span class="text-green-400 font-bold">Rp 150,000/kg</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Benih Standar</span>
+                                        <span class="text-blue-400 font-bold">Rp 100,000/kg</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-yellow-400">📊 Target Penjualan</h4>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-green-400 mb-2">Rp 7.5 Miliar</div>
+                                    <p class="text-gray-300">Revenue target tahun pertama</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Tab -->
+                <div id="financial-content" class="tab-content hidden">
+                    <h3 class="text-3xl font-orbitron font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                        Proyeksi Keuangan
+                    </h3>
+                    <div class="grid md:grid-cols-4 gap-4 mb-8">
+                        <div class="metric-card glass-effect p-6 rounded-2xl text-center">
+                            <h4 class="text-lg font-semibold mb-2 text-green-400">Modal Awal</h4>
+                            <div class="text-2xl font-bold text-white">Rp 5M</div>
+                        </div>
+                        <div class="metric-card glass-effect p-6 rounded-2xl text-center">
+                            <h4 class="text-lg font-semibold mb-2 text-blue-400">Break Even</h4>
+                            <div class="text-2xl font-bold text-white">18 Bulan</div>
+                        </div>
+                        <div class="metric-card glass-effect p-6 rounded-2xl text-center">
+                            <h4 class="text-lg font-semibold mb-2 text-purple-400">ROI Tahun 3</h4>
+                            <div class="text-2xl font-bold text-white">250%</div>
+                        </div>
+                        <div class="metric-card glass-effect p-6 rounded-2xl text-center">
+                            <h4 class="text-lg font-semibold mb-2 text-yellow-400">Margin Profit</h4>
+                            <div class="text-2xl font-bold text-white">35%</div>
+                        </div>
+                    </div>
+                    <div class="glass-effect p-6 rounded-2xl">
+                        <h4 class="text-xl font-semibold mb-4 text-center">Alokasi Investasi</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span>Fasilitas & Peralatan</span>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-32 bg-gray-700 rounded-full h-3">
+                                        <div class="bg-gradient-to-r from-green-400 to-green-500 h-3 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                    <span class="text-green-400 font-bold">60%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>R&D dan Teknologi</span>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-32 bg-gray-700 rounded-full h-3">
+                                        <div class="bg-gradient-to-r from-blue-400 to-blue-500 h-3 rounded-full" style="width: 25%"></div>
+                                    </div>
+                                    <span class="text-blue-400 font-bold">25%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Modal Kerja</span>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-32 bg-gray-700 rounded-full h-3">
+                                        <div class="bg-gradient-to-r from-purple-400 to-purple-500 h-3 rounded-full" style="width: 15%"></div>
+                                    </div>
+                                    <span class="text-purple-400 font-bold">15%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technology Tab -->
+                <div id="technology-content" class="tab-content hidden">
+                    <h3 class="text-3xl font-orbitron font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                        Inovasi Teknologi
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-green-400">🤖 Artificial Intelligence</h4>
+                                <p class="text-gray-300 mb-3">Sistem AI untuk prediksi kualitas benih dan optimasi produksi</p>
+                                <div class="bg-gradient-to-r from-green-500 to-blue-500 px-3 py-1 rounded-full text-sm inline-block">
+                                    Akurasi 98.5%
+                                </div>
+                            </div>
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-blue-400">🌐 IoT Monitoring</h4>
+                                <p class="text-gray-300 mb-3">Sensor real-time untuk monitoring kondisi lingkungan</p>
+                                <div class="bg-gradient-to-r from-blue-500 to-purple-500 px-3 py-1 rounded-full text-sm inline-block">
+                                    24/7 Monitoring
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-purple-400">🔬 Biotechnology</h4>
+                                <p class="text-gray-300 mb-3">Teknik pemuliaan tanaman dengan marker molekuler</p>
+                                <div class="bg-gradient-to-r from-purple-500 to-pink-500 px-3 py-1 rounded-full text-sm inline-block">
+                                    Generasi Baru
+                                </div>
+                            </div>
+                            <div class="metric-card glass-effect p-6 rounded-2xl">
+                                <h4 class="text-xl font-semibold mb-3 text-yellow-400">📱 Digital Platform</h4>
+                                <p class="text-gray-300 mb-3">Aplikasi mobile untuk tracking dan manajemen benih</p>
+                                <div class="bg-gradient-to-r from-yellow-500 to-orange-500 px-3 py-1 rounded-full text-sm inline-block">
+                                    User Friendly
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 glass-effect p-6 rounded-2xl text-center">
+                        <h4 class="text-xl font-semibold mb-4">Roadmap Teknologi</h4>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <div class="bg-gradient-to-r from-green-500 to-green-600 px-4 py-2 rounded-full">Q1: AI Implementation</div>
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-4 py-2 rounded-full">Q2: IoT Integration</div>
+                            <div class="bg-gradient-to-r from-purple-500 to-purple-600 px-4 py-2 rounded-full">Q3: Mobile App Launch</div>
+                            <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 px-4 py-2 rounded-full">Q4: Full Automation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Metrics Dashboard -->
+    <section id="dashboard" class="relative z-10 py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h3 class="text-3xl font-orbitron font-bold mb-12 text-center bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                Dashboard Performa Real-time
+            </h3>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="metric-card glass-effect p-6 rounded-2xl text-center" onclick="animateMetric(this)">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h4 class="text-lg font-semibold mb-2 text-green-400">Pertumbuhan Bulanan</h4>
+                    <div class="text-3xl font-bold text-white" id="growth-metric">12.5%</div>
+                    <p class="text-sm text-gray-400 mt-2">vs bulan lalu</p>
+                </div>
+                <div class="metric-card glass-effect p-6 rounded-2xl text-center" onclick="animateMetric(this)">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h4 class="text-lg font-semibold mb-2 text-blue-400">Target Tercapai</h4>
+                    <div class="text-3xl font-bold text-white" id="target-metric">87%</div>
+                    <p class="text-sm text-gray-400 mt-2">dari target tahunan</p>
+                </div>
+                <div class="metric-card glass-effect p-6 rounded-2xl text-center" onclick="animateMetric(this)">
+                    <div class="text-4xl mb-4">👥</div>
+                    <h4 class="text-lg font-semibold mb-2 text-purple-400">Klien Aktif</h4>
+                    <div class="text-3xl font-bold text-white" id="client-metric">1,247</div>
+                    <p class="text-sm text-gray-400 mt-2">petani terdaftar</p>
+                </div>
+                <div class="metric-card glass-effect p-6 rounded-2xl text-center" onclick="animateMetric(this)">
+                    <div class="text-4xl mb-4">⭐</div>
+                    <h4 class="text-lg font-semibold mb-2 text-yellow-400">Rating Kepuasan</h4>
+                    <div class="text-3xl font-bold text-white" id="rating-metric">4.8/5</div>
+                    <p class="text-sm text-gray-400 mt-2">dari 500+ review</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" onclick="scrollToSection('hero')" class="fixed bottom-8 right-8 bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 z-50 opacity-0 invisible">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+
+
+    <script>
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-button');
+            tabs.forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('glass-effect', 'hover:bg-white/20');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-content').classList.remove('hidden');
+            
+            // Add active class to selected tab
+            const activeTab = document.getElementById('tab-' + tabName);
+            activeTab.classList.add('tab-active');
+            activeTab.classList.remove('glass-effect', 'hover:bg-white/20');
+        }
+
+        // Smooth scroll function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Animate metrics
+        function animateMetric(element) {
+            element.style.transform = 'scale(1.1)';
+            element.style.boxShadow = '0 0 30px rgba(34, 197, 94, 0.5)';
+            
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+                element.style.boxShadow = '';
+            }, 300);
+            
+            // Simulate real-time data update
+            const metricElement = element.querySelector('[id$="-metric"]');
+            const currentValue = metricElement.textContent;
+            metricElement.style.color = '#22c55e';
+            
+            setTimeout(() => {
+                metricElement.style.color = '';
+            }, 1000);
+        }
+
+        // Contact form
+        function showContactForm() {
+            alert('Fitur kontak akan segera tersedia! Untuk saat ini, hubungi kami di email: info@agriseedfuture.com');
+        }
+
+        // Download business plan
+        function downloadBusinessPlan() {
+            alert('Proposal bisnis sedang disiapkan untuk diunduh. Terima kasih atas minat Anda!');
+        }
+
+        // Add scroll animations and scroll to top button
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.metric-card');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animate-slide-in');
+                }
+            });
+
+            // Show/hide scroll to top button
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+                scrollToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                scrollToTopBtn.classList.add('opacity-0', 'invisible');
+                scrollToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        // Auto-update metrics simulation
+        setInterval(() => {
+            const growthMetric = document.getElementById('growth-metric');
+            const targetMetric = document.getElementById('target-metric');
+            const clientMetric = document.getElementById('client-metric');
+            
+            // Simulate small changes
+            const growth = (Math.random() * 5 + 10).toFixed(1);
+            const target = Math.floor(Math.random() * 10 + 85);
+            const clients = Math.floor(Math.random() * 50 + 1200);
+            
+            growthMetric.textContent = growth + '%';
+            targetMetric.textContent = target + '%';
+            clientMetric.textContent = clients.toLocaleString();
+        }, 10000); // Update every 10 seconds
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cfd46ac0af44b9',t:'MTc1NzUxNjc5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
 
