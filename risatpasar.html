@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Pasar Benih Tanaman - Future Agri</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(45deg, rgba(0, 255, 127, 0.1), rgba(0, 191, 255, 0.1));
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 255, 127, 0.3);
+            box-shadow: 0 0 50px rgba(0, 255, 127, 0.2);
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ff7f, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 255, 127, 0.5); }
+            to { text-shadow: 0 0 30px rgba(0, 191, 255, 0.8); }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, rgba(0, 255, 127, 0.2), rgba(0, 191, 255, 0.2));
+            border: 2px solid rgba(0, 255, 127, 0.5);
+            border-radius: 25px;
+            color: #ffffff;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: linear-gradient(45deg, rgba(0, 255, 127, 0.4), rgba(0, 191, 255, 0.4));
+            box-shadow: 0 0 30px rgba(0, 255, 127, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 127, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 127, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 127, 0.3);
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', monospace;
+            color: #00ff7f;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .interactive-chart {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(0, 255, 127, 0.2);
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .bar-label {
+            width: 120px;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+
+        .bar {
+            height: 20px;
+            background: linear-gradient(90deg, #00ff7f, #00bfff);
+            border-radius: 10px;
+            margin: 0 10px;
+            transition: width 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .bar-value {
+            color: #00ff7f;
+            font-weight: 600;
+            min-width: 50px;
+        }
+
+        .trend-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .trend-up {
+            background: rgba(0, 255, 127, 0.2);
+            color: #00ff7f;
+        }
+
+        .trend-down {
+            background: rgba(255, 69, 0, 0.2);
+            color: #ff4500;
+        }
+
+        .interactive-btn {
+            background: linear-gradient(45deg, #00ff7f, #00bfff);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        .interactive-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 255, 127, 0.4);
+        }
+
+        .data-visualization {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, rgba(0, 255, 127, 0.1), rgba(0, 191, 255, 0.1));
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 127, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00ff7f;
+            display: block;
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🌱 AGRI-FUTURE ACADEMY</h1>
+            <p class="subtitle">Analisis Peluang Usaha Produksi Benih Tanaman</p>
+            <p>Teknologi AI untuk Prediksi Pasar Pertanian Masa Depan</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('overview')">Overview Pasar</button>
+            <button class="tab-btn" onclick="showTab('trends')">Tren Benih</button>
+            <button class="tab-btn" onclick="showTab('analysis')">Analisis Data</button>
+            <button class="tab-btn" onclick="showTab('forecast')">Prediksi AI</button>
+        </div>
+
+        <div id="overview" class="tab-content active">
+            <div class="content-grid">
+                <div class="card">
+                    <h3>🌱 Permintaan Pasar Global</h3>
+                    <p>Pasar benih global diproyeksikan mencapai $85.2 miliar pada 2028 dengan pertumbuhan CAGR 8.4%.</p>
+                    
+                    <div class="data-visualization">
+                        <div class="stat-box pulse">
+                            <span class="stat-number">85.2B</span>
+                            <span class="stat-label">USD Proyeksi 2028</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">8.4%</span>
+                            <span class="stat-label">CAGR Growth</span>
+                        </div>
+                    </div>
+                    
+                    <button class="interactive-btn" onclick="updateMarketData()">Update Data Real-time</button>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Segmen Pasar Utama</h3>
+                    <div class="interactive-chart">
+                        <div class="chart-bar">
+                            <span class="bar-label">Sayuran</span>
+                            <div class="bar" style="width: 45%"></div>
+                            <span class="bar-value">45%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <span class="bar-label">Buah-buahan</span>
+                            <div class="bar" style="width: 28%"></div>
+                            <span class="bar-value">28%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <span class="bar-label">Tanaman Hias</span>
+                            <div class="bar" style="width: 18%"></div>
+                            <span class="bar-value">18%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <span class="bar-label">Herbal</span>
+                            <div class="bar" style="width: 9%"></div>
+                            <span class="bar-value">9%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="trends" class="tab-content">
+            <div class="content-grid">
+                <div class="card">
+                    <h3>🚀 Tren Benih Terpopuler 2024</h3>
+                    <div style="margin: 20px 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                            <span>Microgreens</span>
+                            <span class="trend-indicator trend-up">↗ +156%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                            <span>Tanaman Adaptogen</span>
+                            <span class="trend-indicator trend-up">↗ +89%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                            <span>Sayuran Hidroponik</span>
+                            <span class="trend-indicator trend-up">↗ +67%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                            <span>Bunga Edible</span>
+                            <span class="trend-indicator trend-up">↗ +43%</span>
+                        </div>
+                    </div>
+                    <button class="interactive-btn" onclick="refreshTrends()">Refresh Tren</button>
+                </div>
+
+                <div class="card">
+                    <h3>🌍 Faktor Pendorong Permintaan</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 15px 0; padding: 15px; background: rgba(0,255,127,0.1); border-radius: 10px; border-left: 4px solid #00ff7f;">
+                            <strong>Urban Farming:</strong> Pertumbuhan 200% dalam 3 tahun terakhir
+                        </li>
+                        <li style="margin: 15px 0; padding: 15px; background: rgba(0,191,255,0.1); border-radius: 10px; border-left: 4px solid #00bfff;">
+                            <strong>Kesadaran Kesehatan:</strong> Meningkat 85% pasca pandemi
+                        </li>
+                        <li style="margin: 15px 0; padding: 15px; background: rgba(255,215,0,0.1); border-radius: 10px; border-left: 4px solid #ffd700;">
+                            <strong>Sustainability:</strong> 78% konsumen prioritaskan produk ramah lingkungan
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="analysis" class="tab-content">
+            <div class="content-grid">
+                <div class="card">
+                    <h3>🔍 Analisis Mendalam</h3>
+                    <p>Gunakan tools AI untuk menganalisis pola permintaan dan peluang pasar:</p>
+                    
+                    <div style="margin: 20px 0;">
+                        <button class="interactive-btn" onclick="runAnalysis('demand')">Analisis Permintaan</button>
+                        <button class="interactive-btn" onclick="runAnalysis('competition')">Analisis Kompetitor</button>
+                        <button class="interactive-btn" onclick="runAnalysis('pricing')">Analisis Harga</button>
+                    </div>
+                    
+                    <div id="analysisResult" style="margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; display: none;">
+                        <h4 style="color: #00ff7f; margin-bottom: 10px;">Hasil Analisis:</h4>
+                        <p id="analysisText"></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📈 Metrik Kinerja Pasar</h3>
+                    <div class="data-visualization">
+                        <div class="stat-box">
+                            <span class="stat-number">92%</span>
+                            <span class="stat-label">Akurasi Prediksi</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">15.7M</span>
+                            <span class="stat-label">Data Points</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Monitoring</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">156</span>
+                            <span class="stat-label">Negara Terpantau</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="forecast" class="tab-content">
+            <div class="content-grid">
+                <div class="card">
+                    <h3>🤖 Prediksi AI - Q1 2025</h3>
+                    <div style="margin: 20px 0;">
+                        <div style="background: linear-gradient(45deg, rgba(0,255,127,0.2), rgba(0,191,255,0.2)); padding: 20px; border-radius: 15px; margin: 15px 0;">
+                            <h4 style="color: #00ff7f;">Benih Paling Prospektif:</h4>
+                            <p>🥬 Selada Hidroponik - Proyeksi pertumbuhan 180%</p>
+                            <p>🌿 Basil Organik - Proyeksi pertumbuhan 145%</p>
+                            <p>🍅 Tomat Cherry - Proyeksi pertumbuhan 120%</p>
+                        </div>
+                        
+                        <button class="interactive-btn" onclick="generateForecast()">Generate Prediksi Baru</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>⚡ Rekomendasi Strategi</h3>
+                    <div id="recommendations">
+                        <div style="padding: 15px; background: rgba(0,255,127,0.1); border-radius: 10px; margin: 10px 0; border-left: 4px solid #00ff7f;">
+                            <strong>Fokus Segmen:</strong> Investasi pada benih microgreens dan tanaman adaptogen
+                        </div>
+                        <div style="padding: 15px; background: rgba(0,191,255,0.1); border-radius: 10px; margin: 10px 0; border-left: 4px solid #00bfff;">
+                            <strong>Timing Optimal:</strong> Peluncuran produk baru di Q2 2025
+                        </div>
+                        <div style="padding: 15px; background: rgba(255,215,0,0.1); border-radius: 10px; margin: 10px 0; border-left: 4px solid #ffd700;">
+                            <strong>Target Market:</strong> Urban millennials dan Gen Z health-conscious
+                        </div>
+                    </div>
+                    
+                    <button class="interactive-btn" onclick="updateRecommendations()">Update Rekomendasi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 1000; background: rgba(0, 0, 0, 0.8); padding: 15px 30px; border-radius: 50px; backdrop-filter: blur(10px); border: 1px solid rgba(0, 255, 127, 0.3);">
+        <a href="https://atengsani.github.io/pkk/kegiatanproduksi.html" style="text-decoration: none;">
+            <button style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); border: none; padding: 12px 20px; border-radius: 25px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: 'Exo 2', sans-serif; display: flex; align-items: center; gap: 8px;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 10px 20px rgba(255, 107, 107, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                ← Kembali
+            </button>
+        </a>
+        
+        <a href="https://atengsani.github.io/pkk/" style="text-decoration: none;">
+            <button style="background: linear-gradient(45deg, #00ff7f, #00bfff); border: none; padding: 12px 20px; border-radius: 25px; color: #000; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: 'Exo 2', sans-serif; display: flex; align-items: center; gap: 8px;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 10px 20px rgba(0, 255, 127, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                🏠 Beranda
+            </button>
+        </a>
+        
+        <a href="https://atengsani.github.io/pkk/analisisfinansial.html" style="text-decoration: none;">
+            <button style="background: linear-gradient(45deg, #4834d4, #686de0); border: none; padding: 12px 20px; border-radius: 25px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: 'Exo 2', sans-serif; display: flex; align-items: center; gap: 8px;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 10px 20px rgba(72, 52, 212, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                Lanjut →
+            </button>
+        </a>
+    </div>
+
+    <script>
+        // Generate stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Interactive functions
+        function updateMarketData() {
+            const statBoxes = document.querySelectorAll('.stat-box');
+            statBoxes.forEach(box => {
+                box.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    box.style.transform = 'scale(1)';
+                }, 300);
+            });
+            
+            // Simulate data update
+            setTimeout(() => {
+                alert('📊 Data pasar telah diperbarui! Proyeksi terbaru menunjukkan pertumbuhan yang lebih optimis.');
+            }, 500);
+        }
+
+        function refreshTrends() {
+            const trendElements = document.querySelectorAll('.trend-indicator');
+            trendElements.forEach(trend => {
+                trend.style.animation = 'pulse 0.5s ease-in-out';
+                setTimeout(() => {
+                    trend.style.animation = '';
+                }, 500);
+            });
+            
+            setTimeout(() => {
+                alert('🚀 Tren terbaru: Benih tanaman air dan vertical farming mengalami lonjakan permintaan 200%!');
+            }, 600);
+        }
+
+        function runAnalysis(type) {
+            const resultDiv = document.getElementById('analysisResult');
+            const textDiv = document.getElementById('analysisText');
+            
+            resultDiv.style.display = 'block';
+            textDiv.innerHTML = 'Memproses analisis...';
+            
+            setTimeout(() => {
+                let result = '';
+                switch(type) {
+                    case 'demand':
+                        result = 'Analisis permintaan menunjukkan peningkatan 67% untuk benih organik dan 89% untuk tanaman indoor. Segmen microgreens memiliki potensi tertinggi.';
+                        break;
+                    case 'competition':
+                        result = 'Analisis kompetitor mengidentifikasi 3 pemain utama dengan market share 45%. Peluang terbesar ada di segmen benih premium dan specialty crops.';
+                        break;
+                    case 'pricing':
+                        result = 'Analisis harga menunjukkan margin optimal 35-45% untuk benih organik. Strategi bundling dapat meningkatkan revenue 28%.';
+                        break;
+                }
+                textDiv.innerHTML = result;
+            }, 2000);
+        }
+
+        function generateForecast() {
+            const forecasts = [
+                '🌱 Prediksi AI: Benih kangkung hidroponik akan mengalami boom 200% di Q2 2025',
+                '🥕 Alert: Permintaan benih wortel baby akan melonjak 150% menjelang musim tanam',
+                '🌿 Trending: Benih tanaman adaptogen diprediksi menjadi kategori tercepat tumbuh',
+                '🍓 Opportunity: Benih strawberry indoor variety menunjukkan potensi profit margin 60%'
+            ];
+            
+            const randomForecast = forecasts[Math.floor(Math.random() * forecasts.length)];
+            alert(randomForecast);
+        }
+
+        function updateRecommendations() {
+            const recommendations = document.getElementById('recommendations');
+            recommendations.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                recommendations.innerHTML = `
+                    <div style="padding: 15px; background: rgba(0,255,127,0.1); border-radius: 10px; margin: 10px 0; border-left: 4px solid #00ff7f;">
+                        <strong>Hot Opportunity:</strong> Benih tanaman air dan aquaponics - pertumbuhan 300%
+                    </div>
+                    <div style="padding: 15px; background: rgba(0,191,255,0.1); border-radius: 10px; margin: 10px 0; border-left: 4px solid #00bfff;">
+                        <strong>Seasonal Strategy:</strong> Persiapkan stok benih musim hujan 2 bulan lebih awal
+                    </div>
+                    <div style="padding: 15px; background: rgba(255,215,0,0.1); border-radius: 10px; margin: 10px 0; border-left: 4px solid #ffd700;">
+                        <strong>Innovation Focus:</strong> Kembangkan benih tahan perubahan iklim
+                    </div>
+                `;
+                recommendations.style.opacity = '1';
+            }, 1000);
+        }
+
+        // Initialize
+        createStars();
+        
+        // Add some dynamic effects
+        setInterval(() => {
+            const bars = document.querySelectorAll('.bar');
+            bars.forEach(bar => {
+                const currentWidth = parseInt(bar.style.width);
+                const variation = Math.random() * 4 - 2; // -2 to +2
+                const newWidth = Math.max(5, Math.min(100, currentWidth + variation));
+                bar.style.width = newWidth + '%';
+                bar.nextElementSibling.textContent = Math.round(newWidth) + '%';
+            });
+        }, 5000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cf5db5168ecde6',t:'MTc1NzUxMTkyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
